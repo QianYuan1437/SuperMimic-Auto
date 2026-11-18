@@ -1,6 +1,8 @@
 name: Deploy site to GitHub Pages
 
-# 构建 VitePress 站点并发布到 gh-pages 分支（Settings → Pages → Deploy from a branch: gh-pages / root）。
+# 构建 VitePress 站点并同时以两种方式发布，无论 Settings → Pages 的 Source 选哪一项都能生效：
+#   - "GitHub Actions"：由 deploy job 通过 actions/deploy-pages 发布；
+#   - "Deploy from a branch"（gh-pages / root）：由 build job 推送到 gh-pages 分支。
 on:
   push:
     branches: [main]
@@ -8,13 +10,15 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +37,11 @@ jobs:
         env:
           VITEPRESS_BASE: /${{ github.event.repository.name }}/
 
-      - name: Publish to gh-pages
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/.vitepress/dist
+
+      - name: Publish to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -42,3 +50,13 @@ jobs:
           force_orphan: true
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
