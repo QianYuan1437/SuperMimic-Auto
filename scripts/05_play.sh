@@ -4,4 +4,4 @@
 source "$(dirname "$0")/common.sh"
 TASK="${TASK:-SuperMimic-GenCoord-G1}"
 RUN="${1:-$SM_DIR/logs/$TASK}"; shift || true
-sm_run python "$ROOT/tools/play_local.py" "$RUN" "$@"
+sm_run_here python "$ROOT/tools/play_local.py" "$RUN" "$@"

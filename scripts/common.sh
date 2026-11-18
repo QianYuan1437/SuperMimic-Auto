@@ -26,8 +26,14 @@ need_workspace() {
   [[ -d "$SM_DIR/.venv" ]] || die "未找到 $SM_DIR/.venv，请先运行 scripts/01_setup.sh"
 }
 
-# 在 supermimic 的 uv 环境里运行命令（工作目录切到 supermimic，logs/ 会写在那里）
+# 在 supermimic 的 uv 环境里运行命令（工作目录切到 supermimic，训练的 logs/ 会写在那里）
 sm_run() {
   need_workspace
   (cd "$SM_DIR" && uv run --frozen "$@")
+}
+
+# 同上，但保持当前工作目录不变，命令行里的相对路径按调用者所在目录解析
+sm_run_here() {
+  need_workspace
+  uv run --frozen --project "$SM_DIR" "$@"
 }

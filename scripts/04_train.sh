@@ -10,6 +10,7 @@
 #   NUM_ENVS=4096   ITERS=<最大迭代数>   RUN_NAME=<名字>   CUDA_VISIBLE_DEVICES=0
 #   DEPLOY=1        训练可部署到真机的策略：只用本体感知 + 10 帧历史（论文实机设置），会导出 ONNX
 #   WANDB_MODE=online 同步到 W&B（需先 uv run wandb login），默认 offline
+#   SNAPSHOT_EVERY=5000  每 5000 次迭代另存一份权重快照到 snapshots/（默认不另存）
 # 其余命令行参数原样传给上游 train.py，例如：--runner.replay-ratio 8
 source "$(dirname "$0")/common.sh"
 

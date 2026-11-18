@@ -1,0 +1,20 @@
+{
+  "run_dir": "logs/smoke-single-it3000",
+  "num_clips": 1,
+  "num_windows": 24,
+  "failed_windows": 0,
+  "success_rate": 1.0,
+  "failed_clips": 0,
+  "mpkpe": 0.33597320318222046,
+  "r_mpkpe": 0.04345046728849411,
+  "joint_vel_error": 0.8734740018844604,
+  "ee_pos_error": 0.05560710281133652,
+  "ee_ori_error": 0.15164919197559357,
+  "per_clip": {
+    "run1_subject5": {
+      "windows": 24,
+      "failed": 0,
+      "mpkpe": 0.33597320318222046
+    }
+  }
+}

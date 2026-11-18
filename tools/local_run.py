@@ -25,6 +25,8 @@ from supermimic.runners.supermimic_runner import (
   build_world_model,
 )
 
+import quiet_sim  # noqa: F401
+
 META_FILE = "run_meta.json"
 
 
