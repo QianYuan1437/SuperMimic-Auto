@@ -10,11 +10,12 @@
 | `01_setup.sh` | 克隆固定版本的上游代码到 `third_party/`，`uv sync --frozen`，验证 CUDA | `UV_MIRROR=<PyPI 镜像>`；`UPSTREAM_LATEST=1` 使用上游最新 main |
 | `02_download_data.sh` | 下载 LAFAN1 G1 重定向 CSV 到 `data/lafan1_g1_csv/` | `HF_ENDPOINT`；`MOTIONS="a b"` 只下载部分 |
 | `03_convert_motions.sh` | CSV → NPZ（50 fps）到 `data/lafan1_g1_npz/` | `--render` 预览视频；`--overwrite` |
-| `04_train.sh` | 训练世界模型 + 策略 | `PRESET=single\|lafan\|custom`、`MOTION_FILE`、`TASK`、`NUM_ENVS`、`ITERS`、`RUN_NAME`、`DEPLOY=1`、`WANDB_MODE`；其余参数透传给上游 `train.py` |
+| `04_train.sh` | 训练世界模型 + 策略 | `PRESET=single\|lafan\|custom`、`MOTION_FILE`、`TASK`、`NUM_ENVS`、`ITERS`、`RUN_NAME`、`DEPLOY=1`、`SNAPSHOT_EVERY`、`WANDB_MODE`；其余参数透传给上游 `train.py` |
 | `05_play.sh` | viser / 原生查看器交互回放 | `[运行目录]`、`--viewer native`、`--motion-file` |
 | `06_eval.sh` | 无头批量评估，输出 `eval.json` | `[运行目录]`、`--motion-file`、`--stride-s`、`--noise False` |
 | `07_record.sh` | 离屏录制 mp4 | `[运行目录]`、`--clip`、`--start-s`、`--seconds`、`--output` |
 | `08_plot.sh` | 由 `metrics.jsonl` 画训练曲线 | `[运行目录]`、`--output` |
+| `09_eval_snapshots.sh` | 评估所有权重快照并汇总成表格与曲线（`snapshots_summary.json/png`） | `[运行目录]`；训练时需设置 `SNAPSHOT_EVERY` |
 
 `[运行目录]` 可以省略（取 `third_party/supermimic/logs/$TASK/` 下最新一次），也可以传 `""` 占位后再跟其他参数。
 
@@ -32,6 +33,8 @@
 | `eval_local.py` | 按窗口批量评估成功率与跟踪误差 | `mjlab.tasks.tracking.scripts.evaluate` |
 | `record_video.py` | EGL 离屏录像 | `ManagerBasedRlEnv(render_mode="rgb_array")` |
 | `plot_metrics.py` | 训练曲线 | — |
+| `summarize_snapshots.py` | 汇总各快照的评估结果 | — |
+| `quiet_sim.py` | 关闭 MuJoCo Warp 的“迭代次数达到上限”刷屏提示（`SM_SOLVER_WARNINGS=1` 恢复） | `mjlab.sim.SimulationCfg.apply_wp_opt` |
 
 直接调用示例：
 

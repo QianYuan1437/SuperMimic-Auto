@@ -32,6 +32,7 @@ uv run python ../../tools/train_local.py SuperMimic-GenCoord-G1 \
 | `ITERS` | 上游默认 1,000,000 | 最大迭代数，到达后自动结束 |
 | `RUN_NAME` | `<preset>-<时间>` | 运行名 |
 | `DEPLOY` | `0` | `1` 时训练只用本体感知 + 10 帧历史的可部署策略并导出 ONNX，见 [导出与部署](./deploy.md) |
+| `SNAPSHOT_EVERY` | 不另存 | 每隔多少次迭代把权重另存到 `snapshots/it_XXXXXXX/`（应为 `save-interval` 的整数倍） |
 | `CUDA_VISIBLE_DEVICES` | — | 指定 GPU |
 | `WANDB_MODE` | `offline` | `online` 时同步到 W&B（先 `uv run wandb login`） |
 
@@ -71,7 +72,7 @@ third_party/supermimic/logs/SuperMimic-GenCoord-G1/2026-11-18_18-00-00/
 | `Metrics/motion/error_*` | 与参考动作的各项误差 | 下降 |
 | `Episode_Termination/anchor_pos` | 因根节点偏离参考过远而终止的回合数 | 下降 |
 
-日志里大量的 `solver iterations limit reached` / `linesearch iterations limit reached` 来自 MuJoCo Warp 的接触求解器：训练初期策略很差、机器人频繁摔倒时会出现，属于正常现象，不影响训练。
+MuJoCo Warp 的接触求解器在训练初期（机器人频繁摔倒）会每步打印 `solver iterations limit reached` / `linesearch iterations limit reached`，本机实测 16 分钟产生 13 MB 日志。这不影响训练，`tools/quiet_sim.py` 默认关掉这两类提示（其他真正的溢出警告保留）；需要看到它们时设置 `SM_SOLVER_WARNINGS=1`。
 
 ## 训练循环在做什么
 

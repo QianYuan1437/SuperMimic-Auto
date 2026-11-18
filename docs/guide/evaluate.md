@@ -12,6 +12,8 @@ bash scripts/05_play.sh --viewer native              # 有显示器时用 MuJoCo
 
 默认使用 [viser](https://viser.studio) 网页查看器，浏览器打开 <http://localhost:8080>。在远程服务器上运行时，用 SSH 端口转发：`ssh -L 8080:localhost:8080 user@server`。
 
+![viser 查看器：实体为策略控制的机器人，绿色半透明为参考动作，紫色半透明为世界模型的开环预测](/media/viser.png)
+
 查看器由上游 `SuperMimicViserViewer` 提供，可以：
 
 - 在下拉框中切换参考动作；
@@ -46,6 +48,17 @@ bash scripts/06_eval.sh "" --motion-file "data/other/*.npz" # 在其他动作上
 论文在 BONES-SEED 基准上统计“失败动作数”（例如 3 小时 25/129,514）和归一化回报。本仓库的评估脚本在相同精神下按窗口统计失败，便于在 LAFAN1 等小数据集上快速比较，但数值不能与论文表格直接对比。
 :::
 
+## 比较不同训练阶段
+
+上游每次保存都会覆盖同名权重。训练时设置 `SNAPSHOT_EVERY` 可以另存快照，事后统一评估：
+
+```bash
+SNAPSHOT_EVERY=5000 PRESET=lafan bash scripts/04_train.sh   # 生成 snapshots/it_0005000/ ...
+bash scripts/09_eval_snapshots.sh                           # 逐个评估并汇总
+```
+
+汇总结果写到运行目录下的 `snapshots_summary.json` 与 `snapshots_summary.png`（成功率、跟踪误差随训练时长的变化），本机结果见 [复现记录](../results/index.md)。
+
 ## 录制视频
 
 ```bash
@@ -53,7 +66,7 @@ bash scripts/07_record.sh "" --clip dance1_subject1 --seconds 20
 bash scripts/07_record.sh "" --clip fallAndGetUp1_subject1 --start-s 5 --output outputs/getup.mp4
 ```
 
-使用 EGL 离屏渲染，无显示器的服务器也能录制。画面中半透明的标记为参考动作的目标身体位置（mjlab 的调试可视化）。
+使用 EGL 离屏渲染，无显示器的服务器也能录制。画面中绿色半透明的“幽灵”是参考动作（mjlab 的调试可视化），可以直观看到跟踪误差和全局漂移。
 
 ## 训练曲线
 
