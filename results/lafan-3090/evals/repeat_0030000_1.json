@@ -1,0 +1,215 @@
+{
+  "run_dir": "SuperMimic-GenCoord-G1/2026-11-18_18-17-31/snapshots/it_0030000",
+  "num_clips": 40,
+  "num_windows": 902,
+  "failed_windows": 1,
+  "success_rate": 0.9988913536071777,
+  "failed_clips": 1,
+  "mpkpe": 0.16470395028591156,
+  "r_mpkpe": 0.031108567491173744,
+  "joint_vel_error": 0.5604696273803711,
+  "ee_pos_error": 0.041225068271160126,
+  "ee_ori_error": 0.1055583730340004,
+  "per_clip": {
+    "dance1_subject1": {
+      "windows": 14,
+      "failed": 0,
+      "mpkpe": 0.21502043306827545
+    },
+    "dance1_subject2": {
+      "windows": 14,
+      "failed": 0,
+      "mpkpe": 0.18380795419216156
+    },
+    "dance1_subject3": {
+      "windows": 14,
+      "failed": 0,
+      "mpkpe": 0.12012526392936707
+    },
+    "dance2_subject1": {
+      "windows": 23,
+      "failed": 0,
+      "mpkpe": 0.24414974451065063
+    },
+    "dance2_subject2": {
+      "windows": 23,
+      "failed": 0,
+      "mpkpe": 0.2178729772567749
+    },
+    "dance2_subject3": {
+      "windows": 23,
+      "failed": 0,
+      "mpkpe": 0.14374200999736786
+    },
+    "dance2_subject4": {
+      "windows": 23,
+      "failed": 0,
+      "mpkpe": 0.2506260573863983
+    },
+    "dance2_subject5": {
+      "windows": 23,
+      "failed": 0,
+      "mpkpe": 0.1843436360359192
+    },
+    "fallAndGetUp1_subject1": {
+      "windows": 17,
+      "failed": 0,
+      "mpkpe": 0.13555943965911865
+    },
+    "fallAndGetUp1_subject4": {
+      "windows": 17,
+      "failed": 0,
+      "mpkpe": 0.1089576706290245
+    },
+    "fallAndGetUp1_subject5": {
+      "windows": 17,
+      "failed": 0,
+      "mpkpe": 0.13664129376411438
+    },
+    "fallAndGetUp2_subject2": {
+      "windows": 17,
+      "failed": 0,
+      "mpkpe": 0.13285017013549805
+    },
+    "fallAndGetUp2_subject3": {
+      "windows": 17,
+      "failed": 0,
+      "mpkpe": 0.11945519596338272
+    },
+    "fallAndGetUp3_subject1": {
+      "windows": 11,
+      "failed": 0,
+      "mpkpe": 0.1355762481689453
+    },
+    "fight1_subject2": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.1934705376625061
+    },
+    "fight1_subject3": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.17170779407024384
+    },
+    "fight1_subject5": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.2241712361574173
+    },
+    "fightAndSports1_subject1": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.2725802958011627
+    },
+    "fightAndSports1_subject4": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.1881043016910553
+    },
+    "jumps1_subject1": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.1537458598613739
+    },
+    "jumps1_subject2": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.1728643774986267
+    },
+    "jumps1_subject5": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.2035747915506363
+    },
+    "run1_subject2": {
+      "windows": 24,
+      "failed": 0,
+      "mpkpe": 0.17083631455898285
+    },
+    "run1_subject5": {
+      "windows": 24,
+      "failed": 0,
+      "mpkpe": 0.24593394994735718
+    },
+    "run2_subject1": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.22371190786361694
+    },
+    "run2_subject4": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.22195585072040558
+    },
+    "sprint1_subject2": {
+      "windows": 28,
+      "failed": 0,
+      "mpkpe": 0.12189659476280212
+    },
+    "sprint1_subject4": {
+      "windows": 28,
+      "failed": 1,
+      "mpkpe": 0.1915404200553894
+    },
+    "walk1_subject1": {
+      "windows": 27,
+      "failed": 0,
+      "mpkpe": 0.11520825326442719
+    },
+    "walk1_subject2": {
+      "windows": 27,
+      "failed": 0,
+      "mpkpe": 0.12677033245563507
+    },
+    "walk1_subject5": {
+      "windows": 27,
+      "failed": 0,
+      "mpkpe": 0.13528025150299072
+    },
+    "walk2_subject1": {
+      "windows": 24,
+      "failed": 0,
+      "mpkpe": 0.16124758124351501
+    },
+    "walk2_subject3": {
+      "windows": 24,
+      "failed": 0,
+      "mpkpe": 0.12119664996862411
+    },
+    "walk2_subject4": {
+      "windows": 24,
+      "failed": 0,
+      "mpkpe": 0.12326371669769287
+    },
+    "walk3_subject1": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.09253352135419846
+    },
+    "walk3_subject2": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.0896926075220108
+    },
+    "walk3_subject3": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.12803129851818085
+    },
+    "walk3_subject4": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.11475135385990143
+    },
+    "walk3_subject5": {
+      "windows": 25,
+      "failed": 0,
+      "mpkpe": 0.13781724870204926
+    },
+    "walk4_subject1": {
+      "windows": 17,
+      "failed": 0,
+      "mpkpe": 0.09888003766536713
+    }
+  }
+}

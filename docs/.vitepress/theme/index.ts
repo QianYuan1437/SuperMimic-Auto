@@ -3,6 +3,7 @@ import DefaultTheme from 'vitepress/theme'
 import { h } from 'vue'
 import './custom.css'
 import './ui.css'
+import DemoVideo from './components/DemoVideo.vue'
 import PageActions from './components/PageActions.vue'
 import Src from './components/Src.vue'
 
@@ -12,5 +13,6 @@ export default {
   Layout: () => h(DefaultTheme.Layout, null, { 'doc-before': () => h(PageActions) }),
   enhanceApp({ app }) {
     app.component('Src', Src)
+    app.component('DemoVideo', DemoVideo)
   },
 } satisfies Theme

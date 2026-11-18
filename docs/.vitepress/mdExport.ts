@@ -69,6 +69,12 @@ export function exportMarkdown(src: string, relativePath: string, opts: ExportOp
     return `[\`${text}\`](${repo}/${kind}/${opts.repoBranch}/${path.replace(/^\//, '')})`
   })
 
+  // <DemoVideo> -> link to the published video file
+  md = md.replace(/<DemoVideo\b[^>]*\/>/g, (tag) => {
+    const src = (attr(tag, 'src') ?? '').replace(/^\//, '')
+    return `[▶ ${attr(tag, 'caption') ?? src}](${opts.siteUrl}${src})`
+  })
+
   // Interactive components (PascalCase tags, self-closing or paired, possibly multi-line)
   const demo = (name: string) =>
     `> **［交互内容：${name}］** 图表 / 三维演示需在网页中运行，请访问 <${pageUrl}>\n`

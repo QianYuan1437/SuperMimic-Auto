@@ -4,6 +4,10 @@
 
 📖 **文档站点：<https://qianyuan1437.github.io/SuperMimic-Auto/>**（与本仓库 `docs/` 内容相同）
 
+![RTX 3090 训练 3.8 小时后的策略在 LAFAN1 动作上的跟踪效果（绿色半透明为参考动作）](docs/public/media/lafan-grid.png)
+
+**本机复现结果**（单张 RTX 3090，官方默认超参数，LAFAN1 全部 40 段动作）：训练 1.94 小时后 902 个 10 秒窗口中 99.8% 跟踪成功，3.19 小时达到 100%，根相对关键点误差约 3 cm。详见 [复现记录](docs/results/index.md)。
+
 | | |
 | --- | --- |
 | 论文 | [SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model](https://arxiv.org/abs/2610.28480)（Liao, Shao, Long, Zakka, Horowitz, Abbeel, Sreenath · UC Berkeley） |
@@ -18,8 +22,8 @@ bash scripts/00_check_env.sh          # 检查 GPU / 驱动(≥580，推荐≥59
 bash scripts/01_setup.sh              # 克隆固定版本官方代码 + uv sync（国内加 UV_MIRROR=...）
 bash scripts/02_download_data.sh      # LAFAN1 → G1 的 40 段动作（国内加 HF_ENDPOINT=https://hf-mirror.com）
 bash scripts/03_convert_motions.sh    # CSV(30fps) → NPZ(50fps)
-PRESET=single ITERS=20000 bash scripts/04_train.sh   # 单段动作快速验证
-PRESET=lafan bash scripts/04_train.sh                # 全部 40 段（2.45 小时动作）
+PRESET=single ITERS=3001 bash scripts/04_train.sh    # 单段动作快速验证（3090 约 25 分钟）
+PRESET=lafan ITERS=30001 SNAPSHOT_EVERY=5000 bash scripts/04_train.sh  # 全部 40 段（3090 约 3.8 小时）
 bash scripts/06_eval.sh               # 批量评估：成功率 / MPKPE → eval.json
 bash scripts/07_record.sh "" --clip dance1_subject1  # 离屏录像
 bash scripts/05_play.sh               # 交互查看器 http://localhost:8080

@@ -32,7 +32,16 @@ features:
   - title: 面向真机
     details: 一个开关训练只用本体感知 + 10 帧历史的可部署策略，自动导出带元数据的 ONNX，并整理了社区 G1 sim2real 方案。
     link: /guide/deploy
+  - title: 本机实测
+    details: 单张 RTX 3090、官方默认超参数，LAFAN1 全部 40 段动作训练 1.94 小时 99.8% 窗口跟踪成功，3.19 小时达到 100%。附训练曲线、各阶段评估与视频。
+    link: /results/
   - title: 论文与代码对照
     details: 训练循环、世界模型、BPTT、两种状态表示、基于回报的重置采样……每个概念都对应到具体文件与函数。
     link: /paper/notes
 ---
+
+<div class="video-grid" style="max-width:1152px;margin:48px auto 0;padding:0 24px">
+  <DemoVideo src="/media/lafan-dance2_subject1.mp4" caption="舞蹈" />
+  <DemoVideo src="/media/lafan-fallAndGetUp1_subject1.mp4" caption="倒地起身" />
+  <DemoVideo src="/media/lafan-jumps1_subject1.mp4" caption="跳跃" />
+</div>

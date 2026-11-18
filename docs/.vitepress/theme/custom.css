@@ -56,3 +56,11 @@ mjx-container {
     height: 300px;
   }
 }
+
+/* Grid of demo videos (results page). */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}

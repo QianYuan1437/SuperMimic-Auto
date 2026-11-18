@@ -30,6 +30,9 @@ class Args:
   seconds: float = 15.0
   width: int = 960
   height: int = 540
+  distance: float = 2.0
+  """相机到躯干的距离（m）；mjlab 默认 2.8。"""
+  elevation: float = -10.0
   output: str | None = None
   device: str | None = None
 
@@ -54,6 +57,7 @@ def main(args: Args) -> None:
     env_cfg.events.pop("push_robot", None)
     env_cfg.episode_length_s = args.seconds + 1.0
     env_cfg.viewer.width, env_cfg.viewer.height = args.width, args.height
+    env_cfg.viewer.distance, env_cfg.viewer.elevation = args.distance, args.elevation
 
   env, wm, actor, runner_cfg, _ = build_from_run(
     run_dir,

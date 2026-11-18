@@ -23,14 +23,15 @@ bash scripts/02_download_data.sh
 # 5. CSV(30 fps) → NPZ(50 fps)
 bash scripts/03_convert_motions.sh
 
-# 6. 训练：先用单段动作快速验证（几分钟即可看到奖励上升，Ctrl+C 停止）
-PRESET=single ITERS=20000 bash scripts/04_train.sh
+# 6. 训练：先用单段动作快速验证（RTX 3090 上约 25 分钟）
+PRESET=single ITERS=3001 bash scripts/04_train.sh
 
-# 7. 正式训练：全部 40 段 LAFAN1 动作
-PRESET=lafan bash scripts/04_train.sh
+# 7. 正式训练：全部 40 段 LAFAN1 动作（RTX 3090 上约 3.8 小时，可随时 Ctrl+C）
+PRESET=lafan ITERS=30001 SNAPSHOT_EVERY=5000 bash scripts/04_train.sh
 
 # 8. 无头评估（成功率、失败窗口、MPKPE），结果写到运行目录的 eval.json
 bash scripts/06_eval.sh
+bash scripts/09_eval_snapshots.sh   # 评估各阶段快照并画成曲线
 
 # 9. 录制视频 / 打开交互查看器（浏览器访问 http://localhost:8080）
 bash scripts/07_record.sh --clip dance1_subject1 --seconds 20
