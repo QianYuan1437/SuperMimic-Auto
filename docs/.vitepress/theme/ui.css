@@ -1,0 +1,428 @@
+/*
+ * IK Zoo design system: tokens, the shared skin of every interactive control (segmented
+ * controls, buttons, inputs) and rounded overrides of VitePress' default theme.
+ * Components only keep layout rules (padding, flex/grid) in their scoped styles.
+ */
+
+/* ------------------------------------------------------------------------------- tokens */
+
+:root {
+  --ik-radius-xs: 6px;
+  --ik-radius-sm: 10px;
+  --ik-radius-md: 12px;
+  --ik-radius-lg: 16px;
+  --ik-radius-xl: 22px;
+  --ik-radius-pill: 999px;
+
+  --ik-shadow-1: 0 1px 2px rgb(16 24 40 / 0.06), 0 1px 3px rgb(16 24 40 / 0.1);
+  --ik-shadow-2: 0 2px 6px -2px rgb(16 24 40 / 0.08), 0 10px 24px -6px rgb(16 24 40 / 0.14);
+  --ik-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --ik-surface: var(--vp-c-bg-soft);
+  --ik-math-bg: color-mix(in oklab, var(--vp-c-brand-1) 4%, var(--vp-c-bg));
+  --ik-math-border: color-mix(in oklab, var(--vp-c-brand-1) 14%, var(--vp-c-divider));
+
+  --ik-scrollbar-thumb: color-mix(in oklab, var(--vp-c-text-3) 70%, transparent);
+  --ik-scrollbar-track: transparent;
+
+  color-scheme: light;
+  accent-color: var(--vp-c-brand-1);
+}
+
+.dark {
+  --ik-shadow-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 1px 3px rgb(0 0 0 / 0.3);
+  --ik-shadow-2: 0 2px 6px -2px rgb(0 0 0 / 0.5), 0 10px 24px -6px rgb(0 0 0 / 0.5);
+  --ik-math-bg: color-mix(in oklab, var(--vp-c-brand-1) 6%, var(--vp-c-bg));
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------------------- typography */
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.VPHero .name,
+.VPHero .text,
+.VPFeature .title {
+  text-wrap: balance;
+}
+
+.vp-doc p,
+.vp-doc li,
+.vp-doc blockquote,
+.VPHero .tagline,
+.VPFeature .details {
+  text-wrap: pretty;
+}
+
+.vp-doc a,
+.vp-doc td {
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------------------------- shared controls */
+
+.seg {
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--ik-radius-pill);
+  background: var(--vp-c-default-soft);
+}
+
+.seg button {
+  border-radius: var(--ik-radius-pill);
+  color: var(--vp-c-text-2);
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s var(--ik-ease),
+    color 0.15s var(--ik-ease),
+    box-shadow 0.15s var(--ik-ease);
+}
+
+.seg button:hover:not(.on, :disabled) {
+  color: var(--vp-c-text-1);
+}
+
+.seg button.on {
+  background: var(--vp-c-bg);
+  color: var(--vp-c-brand-1);
+  box-shadow: var(--ik-shadow-1);
+}
+
+.dark .seg button.on {
+  background: var(--vp-c-bg-elv);
+}
+
+.seg button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--ik-radius-md);
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+  transition:
+    border-color 0.15s var(--ik-ease),
+    background-color 0.15s var(--ik-ease),
+    color 0.15s var(--ik-ease),
+    box-shadow 0.15s var(--ik-ease);
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn.primary {
+  border-color: var(--vp-c-brand-3);
+  background: var(--vp-c-brand-3);
+  color: var(--vp-c-white);
+  box-shadow: var(--ik-shadow-1);
+}
+
+.btn.primary:hover:not(:disabled) {
+  border-color: var(--vp-c-brand-2);
+  background: var(--vp-c-brand-2);
+  color: var(--vp-c-white);
+}
+
+.btn.active {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.btn.small {
+  border-radius: var(--ik-radius-pill);
+}
+
+.seg button:focus-visible,
+.btn:focus-visible,
+.ik-page-actions a:focus-visible,
+.ik-page-actions button:focus-visible,
+.vp-doc mjx-container[display='true']:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+.VPContent select,
+.VPContent input[type='number'],
+.VPContent input[type='text'] {
+  border-radius: var(--ik-radius-sm);
+  transition: border-color 0.15s var(--ik-ease);
+}
+
+.VPContent select:hover,
+.VPContent input[type='number']:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
+.VPContent input[type='range'] {
+  accent-color: var(--vp-c-brand-1);
+}
+
+.client-only-placeholder {
+  border-radius: var(--ik-radius-lg);
+}
+
+/* Subtle, thin scrollbars on inner scrollers (code, tables, wide equations). */
+.vp-doc [class*='language-'] pre,
+.vp-doc > div > table,
+.vp-doc mjx-container,
+.VPContent aside {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ik-scrollbar-thumb) var(--ik-scrollbar-track);
+}
+
+/* ------------------------------------------------------------------------------- math */
+
+/* MathJax's SVG glyphs run slightly large next to the CJK/Latin UI fonts. */
+.vp-doc mjx-container[jax='SVG']:not([display='true']) {
+  font-size: 0.94em;
+}
+
+.vp-doc mjx-container[display='true'] {
+  display: block;
+  margin: 1.25rem 0 !important;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid var(--ik-math-border);
+  border-radius: var(--ik-radius-lg);
+  background: var(--ik-math-bg);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Equations inside tables / containers / lists stay plain. */
+.vp-doc :is(td, th, li, .custom-block) mjx-container[display='true'] {
+  margin: 0.5rem 0 !important;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+/* ------------------------------------------------------------------------------- doc content */
+
+@media (min-width: 640px) {
+  .vp-doc div[class*='language-'] {
+    border-radius: var(--ik-radius-lg);
+  }
+}
+
+.vp-doc div[class*='language-'] {
+  border: 1px solid var(--vp-c-divider);
+}
+
+.dark .vp-doc div[class*='language-'] {
+  border-color: transparent;
+}
+
+.vp-doc :not(pre, h1, h2, h3, h4, h5, h6) > code {
+  border-radius: var(--ik-radius-xs);
+}
+
+/* Markdown tables only (direct children of the content root or of a container); the tables
+   inside interactive components keep their own styling. */
+:is(.vp-doc > div, .vp-doc .custom-block) > table {
+  width: fit-content;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--ik-radius-lg);
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table :is(th, td) {
+  border: 0;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table :is(th + th, td + td) {
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table tr:last-child > td {
+  border-bottom: 0;
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table thead th {
+  background: var(--vp-c-bg-soft);
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table thead th:first-child {
+  border-start-start-radius: var(--ik-radius-lg);
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table thead th:last-child {
+  border-start-end-radius: var(--ik-radius-lg);
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table tr:last-child > td:first-child {
+  border-end-start-radius: var(--ik-radius-lg);
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table tr:last-child > td:last-child {
+  border-end-end-radius: var(--ik-radius-lg);
+}
+
+:is(.vp-doc > div, .vp-doc .custom-block) > table tr:nth-child(2n) {
+  background: color-mix(in oklab, var(--vp-c-bg-soft) 55%, transparent);
+}
+
+.vp-doc .custom-block {
+  border-radius: var(--ik-radius-lg);
+}
+
+.vp-doc img {
+  border-radius: var(--ik-radius-md);
+}
+
+.vp-doc blockquote {
+  padding: 0.25rem 1rem;
+  border-left-width: 3px;
+  border-radius: 0 var(--ik-radius-sm) var(--ik-radius-sm) 0;
+  background: var(--vp-c-bg-soft);
+}
+
+.vp-doc details {
+  border-radius: var(--ik-radius-lg);
+}
+
+/* ------------------------------------------------------------------------------- chrome */
+
+.DocSearch-Button,
+.VPNavBarSearch .DocSearch-Button {
+  border-radius: var(--ik-radius-pill) !important;
+}
+
+.VPLocalSearchBox .shell {
+  border-radius: var(--ik-radius-xl) !important;
+}
+
+.VPLocalSearchBox .result {
+  border-radius: var(--ik-radius-md) !important;
+}
+
+/* Sidebar: pill highlight instead of the thin indicator bar. */
+.VPSidebarItem.is-link > .item {
+  margin-inline: -10px;
+  padding-inline: 10px;
+  border-radius: var(--ik-radius-sm);
+  transition: background-color 0.15s var(--ik-ease);
+}
+
+.VPSidebarItem.is-link > .item:hover {
+  background: var(--vp-c-default-soft);
+}
+
+.VPSidebarItem.is-active.is-link > .item {
+  background: var(--vp-c-brand-soft);
+}
+
+.VPSidebarItem.is-active > .item > .indicator {
+  display: none;
+}
+
+.VPSidebarItem.is-active > .item .text {
+  font-weight: 600;
+}
+
+.VPDocAsideOutline .outline-marker {
+  width: 3px;
+  border-radius: var(--ik-radius-pill);
+}
+
+.VPDocFooter .pager-link,
+.VPFeature,
+.VPTeamMembersItem {
+  border-radius: var(--ik-radius-xl) !important;
+}
+
+.VPFeature {
+  transition:
+    border-color 0.2s var(--ik-ease),
+    box-shadow 0.2s var(--ik-ease),
+    translate 0.2s var(--ik-ease);
+}
+
+.VPFeatures .item:hover .VPFeature {
+  box-shadow: var(--ik-shadow-2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .VPFeatures .item:hover .VPFeature {
+    translate: 0 -2px;
+  }
+}
+
+.VPButton {
+  transition:
+    background-color 0.15s var(--ik-ease),
+    box-shadow 0.15s var(--ik-ease) !important;
+}
+
+.VPButton.brand {
+  box-shadow: var(--ik-shadow-1);
+}
+
+/* ------------------------------------------------------------------------------- page actions */
+
+.ik-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ik-page-actions a,
+.ik-page-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--ik-radius-pill);
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.6;
+  text-decoration: none;
+  transition:
+    border-color 0.15s var(--ik-ease),
+    color 0.15s var(--ik-ease),
+    background-color 0.15s var(--ik-ease);
+}
+
+.ik-page-actions a:hover,
+.ik-page-actions button:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+.ik-page-actions svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+/* ------------------------------------------------------------------------------- forced colors */
+
+@media (forced-colors: active) {
+  .seg button.on,
+  .btn.active,
+  .btn.primary {
+    outline: 2px solid Highlight;
+  }
+}

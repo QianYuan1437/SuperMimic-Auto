@@ -1,0 +1,13 @@
+third_party/
+data/
+logs/
+wandb/
+outputs/
+*.pt
+*.onnx
+*.npz
+__pycache__/
+.venv/
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/

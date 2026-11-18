@@ -1,0 +1,58 @@
+:root {
+  --vp-c-brand-1: #2a6fc9;
+  --vp-c-brand-2: #3a7fd8;
+  --vp-c-brand-3: #2a78d6;
+  --vp-c-brand-soft: rgba(42, 120, 214, 0.14);
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #2a78d6 20%, #1baf7a);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #2a78d6 50%, #1baf7a 50%);
+  --vp-home-hero-image-filter: blur(56px);
+}
+
+.dark {
+  --vp-c-brand-1: #6ea8f0;
+  --vp-c-brand-2: #4f93e8;
+  --vp-c-brand-3: #3987e5;
+  --vp-c-brand-soft: rgba(57, 135, 229, 0.18);
+}
+
+/* Wide pages (interactive demos): use the full content width, no outline aside. */
+.wide-page .VPDoc.has-sidebar .container,
+.wide-page .VPDoc .container,
+.wide-page .VPDoc .content-container {
+  max-width: 1320px !important;
+}
+.wide-page .VPDoc .content {
+  max-width: none !important;
+}
+
+mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.client-only-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+  border: 1px dashed var(--vp-c-divider);
+  color: var(--vp-c-text-3);
+  font-size: 14px;
+}
+
+/* Home hero: the rendered Panda image is wider than VitePress' default 320 px slot. */
+@media (min-width: 960px) {
+  .VPHero .image-container {
+    width: 460px;
+    height: 420px;
+  }
+  .VPHero .image-src {
+    max-width: 460px;
+    max-height: 420px;
+  }
+  .VPHero .image-bg {
+    width: 300px;
+    height: 300px;
+  }
+}
